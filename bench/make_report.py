@@ -174,23 +174,71 @@ def plots(lat, default):
     p = os.path.join(PLOTS, "throughput_sweep.png"); fig.savefig(p, dpi=150); plt.close(fig)
     made.append(p)
 
-    names = [n for n in lat if model_of(lat[n]) == "laya"]
-    vals = [lat[n]["latency"]["1_questions"]["p50_ms"] for n in names]
-    fig, ax = plt.subplots(figsize=(7, 0.45 * len(names) + 1.2), facecolor=SURFACE)
-    ax.set_facecolor(SURFACE)
-    ax.barh(range(len(names)), vals, height=0.6, color=SERIES[0])
-    ax.axvline(T4["laya"][1], color=MUTED, lw=1, ls="--")
-    ax.annotate("T4 (upstream) %.1f ms" % T4["laya"][1], (T4["laya"][1], len(names) - 0.5),
-                xytext=(4, 0), textcoords="offset points", color=MUTED, fontsize=9)
-    for i, v in enumerate(vals):
-        ax.annotate("%.1f" % v, (v, i), xytext=(4, 0), textcoords="offset points", va="center", color=INK, fontsize=9)
-    ax.set_yticks(range(len(names))); ax.set_yticklabels(names)
-    ax.invert_yaxis()
-    ax.set_xlabel("p50 latency, 1 question (ms) — lower is better")
-    ax.grid(axis="x", color=GRID, lw=0.8); ax.set_axisbelow(True)
-    fig.tight_layout()
-    p = os.path.join(PLOTS, "latency_1q_by_config.png"); fig.savefig(p, dpi=150); plt.close(fig)
-    made.append(p)
+    # Against upstream's published T4 figures, per checkpoint. Two series, one axis.
+    pairs = [("laya", "laya_rocm_bf16"), ("laya-multilingual", "laya-multilingual_rocm_bf16")]
+    pairs = [(m, c) for m, c in pairs if c in lat]
+    if pairs:
+        nqs = [1, 5, 10, 50]
+        fig, axes = plt.subplots(1, len(pairs), figsize=(4.2 * len(pairs), 3.6), facecolor=SURFACE)
+        axes = axes if len(pairs) > 1 else [axes]
+        for ax, (model, cfg) in zip(axes, pairs):
+            ours = [lat[cfg]["latency"]["%d_questions" % n]["p50_ms"] for n in nqs]
+            theirs = [T4[model][n] for n in nqs]
+            x = range(len(nqs))
+            ax.set_facecolor(SURFACE)
+            ax.bar([i - 0.21 for i in x], theirs, width=0.4, color=SERIES[1], label="Tesla T4 (published)")
+            ax.bar([i + 0.21 for i in x], ours, width=0.4, color=SERIES[0], label="Radeon 8060S (laya_rocm)")
+            for i, (t, o) in enumerate(zip(theirs, ours)):
+                ax.annotate("%.0f" % t, (i - 0.21, t), xytext=(0, 3), textcoords="offset points",
+                            ha="center", color=MUTED, fontsize=8)
+                ax.annotate("%.0f" % o, (i + 0.21, o), xytext=(0, 3), textcoords="offset points",
+                            ha="center", color=INK, fontsize=8)
+            ax.set_xticks(list(x)); ax.set_xticklabels(["%d q" % n for n in nqs])
+            ax.set_ylabel("p50 latency (ms)")
+            ax.set_title("`%s` checkpoint" % model, loc="left", fontsize=10)
+            ax.grid(axis="y", color=GRID, lw=0.8); ax.set_axisbelow(True)
+        axes[0].legend(frameon=False, loc="upper left", fontsize=9)
+        fig.suptitle("Latency vs upstream's published T4 numbers — lower is better", x=0.01, ha="left", fontsize=11)
+        fig.tight_layout(rect=(0, 0, 1, 0.94))
+        p = os.path.join(PLOTS, "vs_t4.png"); fig.savefig(p, dpi=150); plt.close(fig)
+        made.append(p)
+
+    # Paired ratios: the only honest way to compare configurations on a machine that drifts.
+    ab = load_ab()
+    if ab:
+        cfgs = [c for c in ab["configs"] if c != ab["meta"]["baseline"]]
+        nqs = [1, 10, 50]
+        fig, ax = plt.subplots(figsize=(7.4, 0.42 * len(cfgs) * len(nqs) + 1.6), facecolor=SURFACE)
+        ax.set_facecolor(SURFACE)
+        ypos, labels = [], []
+        y = 0
+        for c in cfgs:
+            for j, nq in enumerate(nqs):
+                rec = ab["configs"][c].get("%dq" % nq)
+                if not rec:
+                    continue
+                lo, hi, med = rec["ratio_min"], rec["ratio_max"], rec["ratio_vs_baseline_median"]
+                decided = lo > 1.0 or hi < 1.0
+                colour = SERIES[2] if hi < 1.0 else (SERIES[1] if lo > 1.0 else MUTED)
+                ax.plot([lo, hi], [y, y], color=colour, lw=2, solid_capstyle="round",
+                        alpha=1.0 if decided else 0.45)
+                ax.plot([med], [y], marker="o", ms=7, color=colour, mec=SURFACE, mew=1.5,
+                        alpha=1.0 if decided else 0.45)
+                labels.append("%s — %d q" % (c, nq)); ypos.append(y); y += 1
+            y += 0.6
+        ax.axvline(1.0, color=INK, lw=1)
+        ax.annotate("baseline: %s" % ab["meta"]["baseline"], (1.0, -1.1), xytext=(4, 0),
+                    textcoords="offset points", color=MUTED, fontsize=9)
+        ax.set_yticks(ypos); ax.set_yticklabels(labels, fontsize=9)
+        ax.invert_yaxis()
+        ax.set_xlabel("paired latency ratio vs baseline (median, with min–max across rounds)")
+        ax.grid(axis="x", color=GRID, lw=0.8); ax.set_axisbelow(True)
+        ax.set_title("Paired comparison — below 1.0 is faster", loc="left", fontsize=11)
+        ax.annotate("faded = min–max range crosses 1.0, i.e. no measurable difference",
+                    (0, 1.005), xycoords="axes fraction", color=MUTED, fontsize=9)
+        fig.tight_layout()
+        p = os.path.join(PLOTS, "paired_ratios.png"); fig.savefig(p, dpi=150); plt.close(fig)
+        made.append(p)
     return made
 
 

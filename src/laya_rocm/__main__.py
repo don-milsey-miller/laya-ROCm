@@ -10,6 +10,7 @@ def doctor(model: str, smoke: bool) -> int:
 
     from . import runtime
 
+    runtime.configure()  # apply the same defaults a load would, so the report is what you will get
     env = runtime.environment()
     print(json.dumps(env, indent=2, default=str))
     ok = True

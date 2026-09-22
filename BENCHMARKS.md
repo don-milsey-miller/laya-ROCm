@@ -16,7 +16,9 @@ Laya on an AMD Radeon 8060S (Ryzen AI Max+ 395, gfx1151) through ROCm on WSL2. E
 
 ![throughput_sweep.png](results/plots/throughput_sweep.png)
 
-![latency_1q_by_config.png](results/plots/latency_1q_by_config.png)
+![vs_t4.png](results/plots/vs_t4.png)
+
+![paired_ratios.png](results/plots/paired_ratios.png)
 
 ## What the numbers say
 
