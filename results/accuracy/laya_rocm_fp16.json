@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "config": "laya_rocm_fp16",
+    "args": {
+      "model": "convaiinnovations/laya",
+      "impl": "laya_rocm",
+      "device": "cuda",
+      "dtype": "fp16",
+      "blas": null,
+      "fa": null,
+      "tunableop": null,
+      "tunableop_file": null,
+      "native_triton": "auto",
+      "compile": "off",
+      "name": "laya_rocm_fp16",
+      "suites": "typed_decisions,en.ag_news",
+      "reference": "ref_cpu_fp32",
+      "max_tokens": 16384
+    },
+    "timestamp": "2026-09-22 11:54:00",
+    "device": "cuda",
+    "amp_dtype": "float16",
+    "load_s": 44.47,
+    "backends": {
+      "blas": "Cublaslt",
+      "fa": "AOTriton",
+      "ck_sdpa_available": false,
+      "tunableop": "off",
+      "tunableop_file": null,
+      "native_triton": false,
+      "c_compiler": null
+    },
+    "environment": {
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "wsl": true,
+      "torch": "2.13.0+rocm10.0.0",
+      "hip": "7.15.26333",
+      "cuda": null,
+      "gpu_available": true,
+      "cpu_threads": 32,
+      "transformers": "5.17.0",
+      "laya": "0.3.5",
+      "numpy": "2.5.3",
+      "tokenizers": "0.23.2",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "gfx_arch": "gfx1151",
+      "compute_units": 20,
+      "vram_gib": 17.65,
+      "bf16_supported": true,
+      "backends": {
+        "blas": "Cublaslt",
+        "fa": "AOTriton",
+        "ck_sdpa_available": false,
+        "tunableop": "off",
+        "tunableop_file": null,
+        "native_triton": false,
+        "c_compiler": null
+      },
+      "env_vars": {
+        "HSA_ENABLE_DXG_DETECTION": "1"
+      }
+    },
+    "peak_mib": 2976.4
+  },
+  "suites": {
+    "typed_decisions": {
+      "calibrated": {
+        "n": 2000,
+        "accuracy": 0.362,
+        "macro_f1": 0.32680637056381256,
+        "ece": 0.17410653184053512,
+        "brier": 0.74965059575629,
+        "nll": 1.3224721866583324,
+        "aurc": 0.5926065645612889,
+        "mean_confidence": 0.5361065318405351,
+        "acc_at_50_coverage": 0.426,
+        "acc_at_80_coverage": 0.3875
+      },
+      "raw": {
+        "n": 2000,
+        "accuracy": 0.362,
+        "macro_f1": 0.32680637056381256,
+        "ece": 0.26488629735629876,
+        "brier": 0.8278472821385051,
+        "nll": 1.5317317881009398,
+        "aurc": 0.5997489196267181,
+        "mean_confidence": 0.6268862973562986,
+        "acc_at_50_coverage": 0.424,
+        "acc_at_80_coverage": 0.385
+      },
+      "seconds": 44.76,
+      "dropped_questions": 0,
+      "questions_per_second": 44.7,
+      "agreement": {
+        "n": 2000,
+        "top1_agreement": 0.999,
+        "mean_abs_dp": 0.0005413126099979484,
+        "p99_abs_dp": 0.0025096762920285556,
+        "max_abs_dp": 0.006127510837652908,
+        "flips_at_0.5": 3,
+        "flip_rate_at_0.5": 0.0015,
+        "flips_at_0.85": 0,
+        "flip_rate_at_0.85": 0.0,
+        "reference": "ref_cpu_fp32"
+      }
+    },
+    "en.ag_news": {
+      "calibrated": {
+        "n": 600,
+        "accuracy": 0.9466666666666667,
+        "macro_f1": 0.9438349780251156,
+        "ece": 0.039355761770991274,
+        "brier": 0.08692702456268006,
+        "nll": 0.1731461345045937,
+        "aurc": 0.006824785478205172,
+        "mean_confidence": 0.9214680378482323,
+        "acc_at_50_coverage": 1.0,
+        "acc_at_80_coverage": 0.9875
+      },
+      "raw": {
+        "n": 600,
+        "accuracy": 0.9466666666666667,
+        "macro_f1": 0.9438349780251156,
+        "ece": 0.03320193846294399,
+        "brier": 0.09118009412137863,
+        "nll": 0.17794852149947785,
+        "aurc": 0.006708175816938778,
+        "mean_confidence": 0.9726559166909042,
+        "acc_at_50_coverage": 1.0,
+        "acc_at_80_coverage": 0.9895833333333334
+      },
+      "seconds": 5.07,
+      "dropped_questions": 0,
+      "questions_per_second": 118.2,
+      "agreement": {
+        "n": 600,
+        "top1_agreement": 1.0,
+        "mean_abs_dp": 0.00016235691699569265,
+        "p99_abs_dp": 0.0015925003274611846,
+        "max_abs_dp": 0.003499903592687592,
+        "flips_at_0.5": 0,
+        "flip_rate_at_0.5": 0.0,
+        "flips_at_0.85": 1,
+        "flip_rate_at_0.85": 0.00167,
+        "reference": "ref_cpu_fp32"
+      }
+    }
+  }
+}

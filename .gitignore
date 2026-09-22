@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.venv/
+results/*.out
+results/*/*_quick.json
+results/tunableop/
+# private working docs
+notes.md
+STATUS.md

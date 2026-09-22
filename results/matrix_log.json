@@ -1,0 +1,120 @@
+{
+  "accuracy/ref_cpu_fp32": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 1672.7,
+    "finished": "2026-09-22 11:49:51"
+  },
+  "accuracy/laya_upstream_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 108.2,
+    "finished": "2026-09-22 11:51:39"
+  },
+  "accuracy/laya_rocm_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 98.1,
+    "finished": "2026-09-22 11:53:17"
+  },
+  "accuracy/laya_rocm_fp16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 102.1,
+    "finished": "2026-09-22 11:54:59"
+  },
+  "accuracy/laya_rocm_fp32": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 172.0,
+    "finished": "2026-09-22 11:57:51"
+  },
+  "accuracy/laya_rocm_bf16_rocblas": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 94.9,
+    "finished": "2026-09-22 11:59:26"
+  },
+  "accuracy/laya_rocm_bf16_tunableop-use": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 99.4,
+    "finished": "2026-09-22 14:47:10"
+  },
+  "latency/laya_upstream_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 433.9,
+    "finished": "2026-09-22 12:08:17"
+  },
+  "latency/laya_rocm_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 614.2,
+    "finished": "2026-09-22 12:18:31"
+  },
+  "latency/laya_rocm_fp16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 585.6,
+    "finished": "2026-09-22 12:28:17"
+  },
+  "latency/laya_rocm_fp32": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 1491.0,
+    "finished": "2026-09-22 12:53:08"
+  },
+  "latency/laya_rocm_bf16_rocblas": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 565.7,
+    "finished": "2026-09-22 13:02:34"
+  },
+  "latency/laya_rocm_bf16_tunableop-tune": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 547.8,
+    "finished": "2026-09-22 14:43:53"
+  },
+  "latency/laya_rocm_bf16_tunableop-use": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 594.7,
+    "finished": "2026-09-22 14:57:13"
+  },
+  "latency/laya_rocm_bf16_native-triton": {
+    "status": "skipped",
+    "reason": "needs a C compiler (Triton/Inductor JIT); install gcc",
+    "finished": "2026-09-22 14:16:04"
+  },
+  "latency/laya_rocm_bf16_compile": {
+    "status": "skipped",
+    "reason": "needs a C compiler (Triton/Inductor JIT); install gcc",
+    "finished": "2026-09-22 14:16:04"
+  },
+  "latency/laya-multilingual_upstream_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 239.0,
+    "finished": "2026-09-22 14:20:03"
+  },
+  "latency/laya-multilingual_rocm_bf16": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 307.8,
+    "finished": "2026-09-22 14:25:11"
+  },
+  "latency/laya_rocm_fp16_rocblas": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 563.3,
+    "finished": "2026-09-22 14:34:46"
+  },
+  "accuracy/laya_rocm_fp16_rocblas": {
+    "status": "ok",
+    "returncode": 0,
+    "seconds": 97.0,
+    "finished": "2026-09-22 14:45:31"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "rounds": 1,
+    "reps_per_probe": 5,
+    "baseline": "bf16",
+    "timestamp": "2026-09-22 15:21:25",
+    "note": "each round runs every configuration back to back in fresh processes; ratios are paired within a round, so they survive clock drift",
+    "max_drift_range_pct": 0.0
+  },
+  "configs": {
+    "bf16": {
+      "1q": {
+        "p50_ms_per_round": [
+          34.48
+        ],
+        "median_ms": 34.48,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          139.88
+        ],
+        "median_ms": 139.88,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0,
+        "ratio_min": 1.0,
+        "ratio_max": 1.0
+      }
+    },
+    "fp16": {
+      "1q": {
+        "p50_ms_per_round": [
+          32.89
+        ],
+        "median_ms": 32.89,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.9539,
+        "ratio_min": 0.9539,
+        "ratio_max": 0.9539
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          150.34
+        ],
+        "median_ms": 150.34,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0748,
+        "ratio_min": 1.0748,
+        "ratio_max": 1.0748
+      }
+    },
+    "bf16_rocblas": {
+      "1q": {
+        "p50_ms_per_round": [
+          34.28
+        ],
+        "median_ms": 34.28,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.9942,
+        "ratio_min": 0.9942,
+        "ratio_max": 0.9942
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          139.53
+        ],
+        "median_ms": 139.53,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.9975,
+        "ratio_min": 0.9975,
+        "ratio_max": 0.9975
+      }
+    },
+    "fp16_rocblas": {
+      "1q": {
+        "p50_ms_per_round": [
+          37.51
+        ],
+        "median_ms": 37.51,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0879,
+        "ratio_min": 1.0879,
+        "ratio_max": 1.0879
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          130.97
+        ],
+        "median_ms": 130.97,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.9363,
+        "ratio_min": 0.9363,
+        "ratio_max": 0.9363
+      }
+    },
+    "bf16_tunableop": {
+      "1q": {
+        "p50_ms_per_round": [
+          30.61
+        ],
+        "median_ms": 30.61,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.8878,
+        "ratio_min": 0.8878,
+        "ratio_max": 0.8878
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          140.57
+        ],
+        "median_ms": 140.57,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0049,
+        "ratio_min": 1.0049,
+        "ratio_max": 1.0049
+      }
+    },
+    "upstream_bf16": {
+      "1q": {
+        "p50_ms_per_round": [
+          37.44
+        ],
+        "median_ms": 37.44,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 1.0858,
+        "ratio_min": 1.0858,
+        "ratio_max": 1.0858
+      },
+      "10q": {
+        "p50_ms_per_round": [
+          139.35
+        ],
+        "median_ms": 139.35,
+        "drift_range_pct": 0.0,
+        "ratio_vs_baseline_median": 0.9962,
+        "ratio_min": 0.9962,
+        "ratio_max": 0.9962
+      }
+    }
+  }
+}

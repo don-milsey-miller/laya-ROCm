@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "config": "ref_cpu_fp32",
+    "args": {
+      "model": "convaiinnovations/laya",
+      "impl": "laya_rocm",
+      "device": "cpu",
+      "dtype": "fp32",
+      "blas": null,
+      "fa": null,
+      "tunableop": null,
+      "tunableop_file": null,
+      "native_triton": "auto",
+      "compile": "off",
+      "name": "ref_cpu_fp32",
+      "suites": "typed_decisions,en.ag_news",
+      "reference": "ref_cpu_fp32",
+      "max_tokens": 16384
+    },
+    "timestamp": "2026-09-22 11:22:46",
+    "device": "cpu",
+    "amp_dtype": "float32",
+    "load_s": 45.27,
+    "backends": {
+      "blas": "Cublaslt",
+      "fa": "AOTriton",
+      "ck_sdpa_available": false,
+      "tunableop": "off",
+      "tunableop_file": null,
+      "native_triton": false,
+      "c_compiler": null
+    },
+    "environment": {
+      "python": "3.12.3",
+      "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "wsl": true,
+      "torch": "2.13.0+rocm10.0.0",
+      "hip": "7.15.26333",
+      "cuda": null,
+      "gpu_available": true,
+      "cpu_threads": 32,
+      "transformers": "5.17.0",
+      "laya": "0.3.5",
+      "numpy": "2.5.3",
+      "tokenizers": "0.23.2",
+      "gpu": "AMD Radeon(TM) 8060S Graphics",
+      "gfx_arch": "gfx1151",
+      "compute_units": 20,
+      "vram_gib": 17.65,
+      "bf16_supported": true,
+      "backends": {
+        "blas": "Cublaslt",
+        "fa": "AOTriton",
+        "ck_sdpa_available": false,
+        "tunableop": "off",
+        "tunableop_file": null,
+        "native_triton": false,
+        "c_compiler": null
+      },
+      "env_vars": {
+        "HSA_ENABLE_DXG_DETECTION": "1"
+      }
+    },
+    "peak_mib": 0.0
+  },
+  "suites": {
+    "typed_decisions": {
+      "calibrated": {
+        "n": 2000,
+        "accuracy": 0.3615,
+        "macro_f1": 0.3265665624103354,
+        "ece": 0.17465118649100583,
+        "brier": 0.7496889087556572,
+        "nll": 1.3227257119182827,
+        "aurc": 0.5929213151751186,
+        "mean_confidence": 0.5361511864910058,
+        "acc_at_50_coverage": 0.428,
+        "acc_at_80_coverage": 0.38625
+      },
+      "raw": {
+        "n": 2000,
+        "accuracy": 0.3615,
+        "macro_f1": 0.3265665624103354,
+        "ece": 0.2654216414139238,
+        "brier": 0.8278798954193075,
+        "nll": 1.5322482847108254,
+        "aurc": 0.599931900551646,
+        "mean_confidence": 0.6269216414139238,
+        "acc_at_50_coverage": 0.425,
+        "acc_at_80_coverage": 0.384375
+      },
+      "seconds": 1289.38,
+      "dropped_questions": 0,
+      "questions_per_second": 1.6
+    },
+    "en.ag_news": {
+      "calibrated": {
+        "n": 600,
+        "accuracy": 0.9466666666666667,
+        "macro_f1": 0.9438349780251156,
+        "ece": 0.03934564569601391,
+        "brier": 0.08691447912873805,
+        "nll": 0.17311150651819962,
+        "aurc": 0.006816553622642353,
+        "mean_confidence": 0.9214745592225235,
+        "acc_at_50_coverage": 1.0,
+        "acc_at_80_coverage": 0.9875
+      },
+      "raw": {
+        "n": 600,
+        "accuracy": 0.9466666666666667,
+        "macro_f1": 0.9438349780251156,
+        "ece": 0.033194566353055385,
+        "brier": 0.09116539871083826,
+        "nll": 0.1779024593863592,
+        "aurc": 0.0067031395058557,
+        "mean_confidence": 0.9726539562846779,
+        "acc_at_50_coverage": 1.0,
+        "acc_at_80_coverage": 0.9895833333333334
+      },
+      "seconds": 153.01,
+      "dropped_questions": 0,
+      "questions_per_second": 3.9
+    }
+  }
+}
