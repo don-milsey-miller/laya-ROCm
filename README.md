@@ -64,9 +64,11 @@ ROCm wheel with a CUDA or CPU one.
 **2. Install the package** (pulls upstream `laya>=0.3.5,<0.4`):
 
 ```bash
-pip install laya-rocm            # once published
-pip install git+https://github.com/don-milsey-miller/laya-ROCm    # from source
+pip install git+https://github.com/don-milsey-miller/laya-ROCm           # latest main
+pip install git+https://github.com/don-milsey-miller/laya-ROCm@v0.1.0    # a specific tag
 ```
+
+Not on PyPI: install from Git, or clone and `pip install -e .`.
 
 ### WSL2 on Windows (Radeon / Ryzen AI) — optional helper
 
