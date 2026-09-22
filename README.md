@@ -50,7 +50,7 @@ GPUs are expected to work but are unverified — see [Scope of testing](#scope-o
 
 Outputs are unchanged: on CPU in FP32, `laya_rocm` returns results identical to `laya`, and on the
 GPU it matches a CPU FP32 reference to within the precision of the chosen dtype
-([measured](BENCHMARKS.md)).
+([measured](https://github.com/don-milsey-miller/laya-ROCm/blob/main/BENCHMARKS.md)).
 
 ---
 
@@ -233,9 +233,9 @@ runtime.is_rocm(), runtime.is_wsl(), runtime.gfx_arch()
 
 Radeon 8060S (Ryzen AI Max+ 395, gfx1151, 20 CUs, 17.65 GiB unified memory) under WSL2, torch
 2.13 + ROCm 10, against upstream's **published Tesla T4 figures** (torch 2.11 + CUDA 12.8, not
-re-measured here). Full detail, including accuracy and calibration, in [BENCHMARKS.md](BENCHMARKS.md).
+re-measured here). Full detail, including accuracy and calibration, in [BENCHMARKS.md](https://github.com/don-milsey-miller/laya-ROCm/blob/main/BENCHMARKS.md).
 
-![Latency vs upstream's published T4 numbers](results/plots/vs_t4.png)
+![Latency vs upstream's published T4 numbers](https://raw.githubusercontent.com/don-milsey-miller/laya-ROCm/main/results/plots/vs_t4.png)
 
 | | 1 question | 10 questions | 50 questions |
 |---|---:|---:|---:|
@@ -247,7 +247,7 @@ re-measured here). Full detail, including accuracy and calibration, in [BENCHMAR
 Throughput saturates around 110 questions/s on the 421M-parameter English checkpoint; longer
 states cost proportionally more, and batching questions into one call is what buys throughput:
 
-![Throughput vs batch size](results/plots/throughput_sweep.png)
+![Throughput vs batch size](https://raw.githubusercontent.com/don-milsey-miller/laya-ROCm/main/results/plots/throughput_sweep.png)
 
 ### Measurement honesty
 
@@ -258,7 +258,7 @@ larger than most differences between settings, so configurations are compared in
 every configuration runs back to back in each round, and the ratio within a round is what
 survives the drift (`bench/bench_ab.py`).
 
-![Paired comparison of configurations](results/plots/paired_ratios.png)
+![Paired comparison of configurations](https://raw.githubusercontent.com/don-milsey-miller/laya-ROCm/main/results/plots/paired_ratios.png)
 
 What holds up (5 rounds, ranges that do not cross 1.0):
 
@@ -368,7 +368,7 @@ no tuned CSV.
 | `torch.cuda.is_available()` is `False` in WSL | install librocdxg; for ROCm < 7.13 also `export HSA_ENABLE_DXG_DETECTION=1` (both handled by `scripts/setup_wsl.sh`) |
 | `libgomp.so.1: cannot open shared object file` | minimal WSL image; `scripts/setup_wsl.sh` unpacks it into `~/.laya-rocm/sysdeps` |
 | `torch.compile` fails | needs a C compiler; unavailable in a minimal WSL image |
-| Confidence values differ slightly from CPU | expected for BF16/FP16 autocast. Quantified in [BENCHMARKS.md](BENCHMARKS.md); use `dtype="fp16"` or `"fp32"` if thresholds matter |
+| Confidence values differ slightly from CPU | expected for BF16/FP16 autocast. Quantified in [BENCHMARKS.md](https://github.com/don-milsey-miller/laya-ROCm/blob/main/BENCHMARKS.md); use `dtype="fp16"` or `"fp32"` if thresholds matter |
 | `ValueError: … options exceed head_max_len` | too many/long options for the checkpoint's head budget — upstream behaviour, not ROCm-specific |
 
 ---
@@ -408,7 +408,8 @@ python bench/make_report.py         # -> BENCHMARKS.md and results/plots/
 ```
 
 `laya_rocm` subclasses upstream internals, so it pins `laya<0.4` and is tested against each laya
-release before the pin moves.
+release before the pin moves. Verified against **laya 0.3.5 and 0.3.6** — the token-parity tests
+are what catch an upstream change to sequence building.
 
 ## License
 
